@@ -272,7 +272,8 @@ void output_annotation(image im, int num, float thresh, box *boxes, float **prob
             if(top < 0) top = 0;
             if(bot > im.h-1) bot = im.h-1;
 
-            fprintf(f, "%s %d %d %d %d %f\n", names[class], left, top, right, bot, prob);
+            /*fprintf(f, "%s %d %d %d %d %f\n", names[class], left, top, right, bot, prob);*/
+            fprintf(f, "%s 0.0 0 0.0 %d %d %d %d 0.0 0.0 0.0 0.0 0.0 0.0 0.0 %f\n", names[class], left, top, right, bot, prob); // KITTI format
 
             draw_box_width(im, left, top, right, bot, width, red, green, blue);
             if (alphabet) {
