@@ -646,3 +646,54 @@ float **one_hot_encode(float *a, int n, int k)
     return t;
 }
 
+char *trim_white_space(char *str) {
+  char *end;
+
+  // Trim leading space
+  while(isspace((unsigned char)*str)) str++;
+
+  if(*str == 0)  // All spaces?
+    return str;
+
+  // Trim trailing space
+  end = str + strlen(str) - 1;
+  while(end > str && isspace((unsigned char)*end)) end--;
+
+  // Write new null terminator
+  *(end+1) = 0;
+
+  return str;
+}
+
+char *get_basename(char const *path) {
+  char *s = strrchr(path, '/');
+  if (!s)
+    return strdup(path);
+  else
+    return strdup(s + 1);
+}
+
+// It is expected that image name contains extension delimited by "dot".
+// E.g. image.png
+char *get_imgname(char const *path) {
+  char *basename = get_basename(path);
+
+  char *imgname = NULL;
+
+  char *s = strrchr(basename, '.');
+  if (s)
+    imgname = strndup(basename, s-basename);
+  else
+    imgname = strdup(basename);
+
+  free(basename);
+  return imgname;
+}
+
+void make_dir(char const *path) {
+  struct stat st = {0};
+
+  if (stat(path, &st) == -1) {
+        mkdir(path, 0700);
+  }
+}

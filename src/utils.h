@@ -2,6 +2,10 @@
 #define UTILS_H
 #include <stdio.h>
 #include <time.h>
+#include <ctype.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 #include "list.h"
 
 #define SECRET_NUM -1234
@@ -60,6 +64,12 @@ int find_arg(int argc, char* argv[], char *arg);
 char *find_char_arg(int argc, char **argv, char *arg, char *def);
 int sample_array(float *a, int n);
 void print_statistics(float *a, int n);
+
+// Martin Kersner, 2017/05/19
+char *trim_white_space(char *);
+char *get_basename(char const *);
+char *get_imgname(char const *);
+void make_dir(char const *);
 
 #endif
 
