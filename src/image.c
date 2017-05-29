@@ -283,6 +283,7 @@ void output_annotation(image im, int num, float thresh, box *boxes, float **prob
             }
         }
     }
+    fclose(f);
 }
 
 void transpose_image(image im)
